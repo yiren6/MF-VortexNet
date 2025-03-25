@@ -58,7 +58,7 @@ into a conceptual aircraft design environment [SUAVE](https://github.com/suaveco
   - **Physics-informed loss functions**
     The loss function combines SmoothL1Loss, SignLoss, and PhysicalLoss to train VortexNet. SmoothL1 minimizes error magnitude, SignLoss penalizes sign mismatches, and PhysicalLoss adds physics-informed constraints. The PhysicalLoss balances physics-driven accuracy and training efficiency, with all contributions controlled by tunable hyperparameters.
 
-    $\mathcal{L} = \text{SmoothL1Loss} \left( q^{HF}, q^{\text{pred}} \right) + \Lambda \hspace{1}\text{PhysicalLoss} \left( q^{\text{pred}}  \right) + \Omega \hspace{1} \text{SignLoss} \left(q^{HF}, q^{\text{pred}} \right),$
+    $\mathcal{L} = \text{SmoothL1Loss} \left( q^{HF}, q^{\text{pred}} \right) + \Lambda \text{PhysicalLoss} \left( q^{\text{pred}}  \right) + \Omega \text{SignLoss} \left(q^{HF}, q^{\text{pred}} \right),$
     where the PhyscialLoss is:
     $\text{PhysicalLoss} (q^{\text{pred}}) = \lvert \lvert AIC \cdot \Gamma^{\text{pred}}(q^{\text{pred}}) - RHS \rvert \rvert.$
 
