@@ -15,11 +15,38 @@ Yiren Shen (yrshen@stanford.edu), Jacob T. Needels, Juan J. Alonso
 - Compatible with existing conceptual design and MDO frameworks ([SUAVE](https://github.com/suavecode/SUAVE)).
 
 # Environment
-  pip install -r requirements.txt
+  ## 1. Library:
+    pip install -r requirements.txt
+  ## 2. SUAVE: 
+    [SUAVE Install](https://suave.stanford.edu/download/standard_install.html)
 
+# Content
+  ## 1. ./VortexNet
+     VortexNet library with data structure (MFData.py), network (model.py), traning (training.py) and utility functions (VortexNetUtils.py) inluded. 
+  ## 2. ./dataset
+    Tabulated data set in .pkl. Data structure is defined in MFData.py.
 
-# Description of Included Repo
+    ./dataset/train_set: data used for network training for the following delta wings:
+    The free stream conditions are included in the ./freestream_configurations files
+    
+    | Sweep [deg]   | Airfoil [NACA] | Free-strem conditions |
+    | -------- | ------- |  ------- |
+    | 55    | 0010, 0016, 0024, 2416, 4416  | see corresponding configuration files |
+    | 65    | 0010, 0016, 0024, 2416, 4416  | see corresponding configuration files |
+    | 75    | 0010, 0016, 0024, 2416, 4416  | see corresponding configuration files |
 
+    ./dataset/new_geom: data used for network generalizability test for the following delta wings:
+    The free stream conditions are included in the ./freestream_configurations files
+    | Sweep [deg]   | Airfoil [NACA] | Free-strem conditions |
+    | -------- | ------- |  ------- |
+    | 60    | 0013, 3416 | see corresponding configuration files |
+    | 70    | 0013, 3416 | see corresponding configuration files |
+
+    ./dataset/freestream_configurations: free-stream conditions for the run, both CFD and VLM
+    The file is tabulated by test index, AOA, Mach number, Reynolds number for each row. 
+
+   ## 3. ./scripts
+     - "search_hp_for_deltawing.py": script for hyper parameter optimization using Optuna. 
 
 # Abstract
 
