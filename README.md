@@ -1,5 +1,7 @@
 # MF-VortexNet
-**Graph Neural Network-Based Multi-Fidelity Correction to Vortex Lattice Method. Please see the paper INSERT DOI. **
+**Graph Neural Network-Based Multi-Fidelity Correction to Vortex Lattice Method. Please see the paper INSERT DOI.**
+
+
 Yiren Shen (yrshen@stanford.edu), Jacob T. Needels, Juan J. Alonso
 
 # 🔍 Highlights
@@ -62,7 +64,7 @@ into a conceptual aircraft design environment [SUAVE](https://github.com/suaveco
     where the PhyscialLoss is:
     $\text{PhysicalLoss} (q^{\text{pred}}) = \lvert \lvert AIC \cdot \Gamma^{\text{pred}}(q^{\text{pred}}) - RHS \rvert \rvert.$
 
-  - **Hyperparameter tuning** via Optuna
+  - **Hyperparameter tuning** via [Optuna](https://github.com/optuna/optuna)
 
 ---
 
