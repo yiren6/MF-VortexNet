@@ -21,32 +21,39 @@ Yiren Shen (yrshen@stanford.edu), Jacob T. Needels, Juan J. Alonso
     [SUAVE Install](https://suave.stanford.edu/download/standard_install.html)
 
 # Content
-  ## 1. ./VortexNet
-     VortexNet library with data structure (MFData.py), network (model.py), traning (training.py) and utility functions (VortexNetUtils.py) inluded. 
-  ## 2. ./dataset
-    Tabulated data set in .pkl. Data structure is defined in MFData.py.
 
-    ./dataset/train_set: data used for network training for the following delta wings:
-    The free stream conditions are included in the ./freestream_configurations files
-    
-    | Sweep [deg]   | Airfoil [NACA] | Free-strem conditions |
-    | -------- | ------- |  ------- |
-    | 55    | 0010, 0016, 0024, 2416, 4416  | see corresponding configuration files |
-    | 65    | 0010, 0016, 0024, 2416, 4416  | see corresponding configuration files |
-    | 75    | 0010, 0016, 0024, 2416, 4416  | see corresponding configuration files |
+## 1. ./VortexNet
+VortexNet library with data structure (`MFData.py`), network (`model.py`), training (`training.py`), and utility functions (`VortexNetUtils.py`) included.
 
-    ./dataset/new_geom: data used for network generalizability test for the following delta wings:
-    The free stream conditions are included in the ./freestream_configurations files
-    | Sweep [deg]   | Airfoil [NACA] | Free-strem conditions |
-    | -------- | ------- |  ------- |
-    | 60    | 0013, 3416 | see corresponding configuration files |
-    | 70    | 0013, 3416 | see corresponding configuration files |
+## 2. ./dataset
+Tabulated dataset in `.pkl`. Data structure is defined in `MFData.py`.
 
-    ./dataset/freestream_configurations: free-stream conditions for the run, both CFD and VLM
-    The file is tabulated by test index, AOA, Mach number, Reynolds number for each row. 
+### ./dataset/train_set
+Data used for network training for the following delta wings.  
+The free-stream conditions are included in the `./freestream_configurations` files.
 
-   ## 3. ./scripts
-     - "search_hp_for_deltawing.py": script for hyper parameter optimization using Optuna. 
+| Sweep [deg] | Airfoil [NACA]                 | Free-stream conditions                 |
+|-------------|--------------------------------|----------------------------------------|
+| 55          | 0010, 0016, 0024, 2416, 4416   | See corresponding configuration files |
+| 65          | 0010, 0016, 0024, 2416, 4416   | See corresponding configuration files |
+| 75          | 0010, 0016, 0024, 2416, 4416   | See corresponding configuration files |
+
+### ./dataset/new_geom
+Data used for generalizability testing on new delta wings.  
+Free-stream conditions are included in the `./freestream_configurations` files.
+
+| Sweep [deg] | Airfoil [NACA] | Free-stream conditions                 |
+|-------------|----------------|----------------------------------------|
+| 60          | 0013, 3416     | See corresponding configuration files |
+| 70          | 0013, 3416     | See corresponding configuration files |
+
+### ./dataset/freestream_configurations
+Free-stream conditions for both CFD and VLM runs.  
+Each row contains: test index, AOA, Mach number, Reynolds number.
+
+## 3. ./scripts
+- `search_hp_for_deltawing.py`: Script for hyperparameter optimization using Optuna.
+
 
 # Abstract
 
