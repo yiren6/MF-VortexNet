@@ -1,0 +1,117 @@
+
+Starting fold 1/4...
+Epoch 0, Training Loss: 120.9924, Validation Loss: 112.5418,                       Validation Physical Loss: 82.6773
+Epoch 100, Training Loss: 59.4011, Validation Loss: 39.8760,                       Validation Physical Loss: 17.7936
+Epoch 200, Training Loss: 44.5781, Validation Loss: 30.1990,                       Validation Physical Loss: 17.5153
+Epoch 300, Training Loss: 42.3640, Validation Loss: 31.4201,                       Validation Physical Loss: 12.5349
+Epoch 400, Training Loss: 41.8535, Validation Loss: 35.5290,                       Validation Physical Loss: 15.5089
+Epoch 500, Training Loss: 38.7149, Validation Loss: 29.9450,                       Validation Physical Loss: 12.3814
+Epoch 600, Training Loss: 42.8625, Validation Loss: 31.4609,                       Validation Physical Loss: 14.6209
+Epoch 700, Training Loss: 55.0377, Validation Loss: 47.0886,                       Validation Physical Loss: 13.3635
+Epoch 800, Training Loss: 41.2699, Validation Loss: 37.3182,                       Validation Physical Loss: 9.7326
+Early stopping at epoch 835. Best validation loss: 28.3524
+Fold 1 completed. Best validation loss: 28.3524
+
+Starting fold 2/4...
+Epoch 0, Training Loss: 5.1213, Validation Loss: 3.0643,                       Validation Physical Loss: 25.5866
+Epoch 100, Training Loss: 4.5057, Validation Loss: 3.1050,                       Validation Physical Loss: 26.0901
+Epoch 200, Training Loss: 4.3990, Validation Loss: 3.0541,                       Validation Physical Loss: 27.3365
+Epoch 300, Training Loss: 4.4049, Validation Loss: 3.7574,                       Validation Physical Loss: 30.7078
+Epoch 400, Training Loss: 4.3319, Validation Loss: 3.0951,                       Validation Physical Loss: 28.8814
+Epoch 500, Training Loss: 4.0196, Validation Loss: 3.2441,                       Validation Physical Loss: 29.3678
+Epoch 600, Training Loss: 4.0973, Validation Loss: 2.6767,                       Validation Physical Loss: 24.4650
+Epoch 700, Training Loss: 3.6505, Validation Loss: 2.7573,                       Validation Physical Loss: 25.0976
+Epoch 800, Training Loss: 4.4281, Validation Loss: 3.1753,                       Validation Physical Loss: 27.9435
+Epoch 900, Training Loss: 4.6898, Validation Loss: 3.2180,                       Validation Physical Loss: 27.4980
+Epoch 1000, Training Loss: 4.5867, Validation Loss: 3.0914,                       Validation Physical Loss: 26.3854
+Early stopping at epoch 1019. Best validation loss: 2.6335
+Fold 2 completed. Best validation loss: 2.6335
+
+Starting fold 3/4...
+Epoch 0, Training Loss: 0.9349, Validation Loss: 0.7431,                       Validation Physical Loss: 17.5828
+Epoch 100, Training Loss: 0.7873, Validation Loss: 0.6458,                       Validation Physical Loss: 16.7838
+Epoch 200, Training Loss: 0.7920, Validation Loss: 0.6819,                       Validation Physical Loss: 20.0796
+Epoch 300, Training Loss: 0.8122, Validation Loss: 0.6722,                       Validation Physical Loss: 19.7075
+Epoch 400, Training Loss: 0.7744, Validation Loss: 0.6999,                       Validation Physical Loss: 19.3326
+Epoch 500, Training Loss: 0.6789, Validation Loss: 0.5912,                       Validation Physical Loss: 18.3488
+Epoch 600, Training Loss: 0.8094, Validation Loss: 0.6138,                       Validation Physical Loss: 18.3239
+Epoch 700, Training Loss: 0.8077, Validation Loss: 0.6347,                       Validation Physical Loss: 19.5000
+Epoch 800, Training Loss: 0.7715, Validation Loss: 0.5995,                       Validation Physical Loss: 19.8930
+Epoch 900, Training Loss: 0.6834, Validation Loss: 0.5626,                       Validation Physical Loss: 15.6949
+Epoch 1000, Training Loss: 0.8154, Validation Loss: 0.6176,                       Validation Physical Loss: 18.6362
+Epoch 1100, Training Loss: 0.7396, Validation Loss: 0.5950,                       Validation Physical Loss: 18.3655
+Epoch 1200, Training Loss: 0.7020, Validation Loss: 0.5860,                       Validation Physical Loss: 18.3601
+Epoch 1300, Training Loss: 0.6869, Validation Loss: 0.5997,                       Validation Physical Loss: 18.3625
+Epoch 1400, Training Loss: 0.7501, Validation Loss: 0.5882,                       Validation Physical Loss: 17.5351
+Epoch 1500, Training Loss: 0.7732, Validation Loss: 0.5382,                       Validation Physical Loss: 16.7748
+Epoch 1600, Training Loss: 0.7016, Validation Loss: 0.6035,                       Validation Physical Loss: 20.4942
+Epoch 1700, Training Loss: 0.7371, Validation Loss: 0.5355,                       Validation Physical Loss: 16.9602
+Epoch 1800, Training Loss: 0.7465, Validation Loss: 0.5584,                       Validation Physical Loss: 19.5126
+Epoch 1900, Training Loss: 0.6584, Validation Loss: 0.5862,                       Validation Physical Loss: 19.5437
+Epoch 2000, Training Loss: 0.6125, Validation Loss: 0.5536,                       Validation Physical Loss: 17.1987
+Epoch 2100, Training Loss: 0.6842, Validation Loss: 0.5814,                       Validation Physical Loss: 17.2012
+Epoch 2200, Training Loss: 0.6701, Validation Loss: 0.5957,                       Validation Physical Loss: 19.1763
+Epoch 2300, Training Loss: 0.6425, Validation Loss: 0.5431,                       Validation Physical Loss: 18.7619
+Epoch 2400, Training Loss: 0.6693, Validation Loss: 0.5496,                       Validation Physical Loss: 19.7354
+Epoch 2500, Training Loss: 0.6894, Validation Loss: 0.5242,                       Validation Physical Loss: 18.3333
+Epoch 2600, Training Loss: 0.6557, Validation Loss: 0.4950,                       Validation Physical Loss: 16.8282
+Epoch 2700, Training Loss: 0.6614, Validation Loss: 0.5192,                       Validation Physical Loss: 18.3830
+Epoch 2800, Training Loss: 0.6400, Validation Loss: 0.4902,                       Validation Physical Loss: 15.8709
+Epoch 2900, Training Loss: 0.6111, Validation Loss: 0.5023,                       Validation Physical Loss: 16.0727
+Epoch 3000, Training Loss: 0.6385, Validation Loss: 0.5112,                       Validation Physical Loss: 18.7841
+Epoch 3100, Training Loss: 0.6502, Validation Loss: 0.5107,                       Validation Physical Loss: 17.7818
+Epoch 3200, Training Loss: 0.6237, Validation Loss: 0.5381,                       Validation Physical Loss: 19.8063
+Epoch 3300, Training Loss: 0.6122, Validation Loss: 0.4889,                       Validation Physical Loss: 17.2739
+Epoch 3400, Training Loss: 0.6299, Validation Loss: 0.4642,                       Validation Physical Loss: 15.9208
+Epoch 3500, Training Loss: 0.6166, Validation Loss: 0.4867,                       Validation Physical Loss: 16.3366
+Epoch 3600, Training Loss: 0.5957, Validation Loss: 0.4884,                       Validation Physical Loss: 16.9780
+Epoch 3700, Training Loss: 0.6258, Validation Loss: 0.4753,                       Validation Physical Loss: 16.7876
+Epoch 3800, Training Loss: 0.6265, Validation Loss: 0.4905,                       Validation Physical Loss: 17.2432
+Early stopping at epoch 3887. Best validation loss: 0.4468
+Fold 3 completed. Best validation loss: 0.4468
+
+Starting fold 4/4...
+Epoch 0, Training Loss: 0.3643, Validation Loss: 0.3750,                       Validation Physical Loss: 33.8367
+Epoch 100, Training Loss: 0.2992, Validation Loss: 0.2761,                       Validation Physical Loss: 51.4064
+Epoch 200, Training Loss: 0.2784, Validation Loss: 0.2712,                       Validation Physical Loss: 51.2602
+Epoch 300, Training Loss: 0.2701, Validation Loss: 0.2245,                       Validation Physical Loss: 47.1908
+Epoch 400, Training Loss: 0.2463, Validation Loss: 0.2384,                       Validation Physical Loss: 57.5981
+Epoch 500, Training Loss: 0.2807, Validation Loss: 0.2211,                       Validation Physical Loss: 43.6506
+Epoch 600, Training Loss: 0.2500, Validation Loss: 0.2564,                       Validation Physical Loss: 52.2445
+Epoch 700, Training Loss: 0.2698, Validation Loss: 0.2080,                       Validation Physical Loss: 40.9336
+Epoch 800, Training Loss: 0.2691, Validation Loss: 0.2104,                       Validation Physical Loss: 47.7767
+Epoch 900, Training Loss: 0.2529, Validation Loss: 0.2185,                       Validation Physical Loss: 46.5340
+Epoch 1000, Training Loss: 0.2511, Validation Loss: 0.2377,                       Validation Physical Loss: 36.6335
+Epoch 1100, Training Loss: 0.2693, Validation Loss: 0.2162,                       Validation Physical Loss: 38.5971
+Epoch 1200, Training Loss: 0.2830, Validation Loss: 0.2139,                       Validation Physical Loss: 37.0146
+Epoch 1300, Training Loss: 0.2564, Validation Loss: 0.2081,                       Validation Physical Loss: 52.2123
+Epoch 1400, Training Loss: 0.2517, Validation Loss: 0.1863,                       Validation Physical Loss: 39.9061
+Epoch 1500, Training Loss: 0.2526, Validation Loss: 0.1840,                       Validation Physical Loss: 44.2751
+Epoch 1600, Training Loss: 0.2595, Validation Loss: 0.1881,                       Validation Physical Loss: 36.5008
+Epoch 1700, Training Loss: 0.2368, Validation Loss: 0.1986,                       Validation Physical Loss: 44.7549
+Epoch 1800, Training Loss: 0.2258, Validation Loss: 0.1758,                       Validation Physical Loss: 48.4180
+Epoch 1900, Training Loss: 0.2323, Validation Loss: 0.2009,                       Validation Physical Loss: 54.5396
+Epoch 2000, Training Loss: 0.2110, Validation Loss: 0.1628,                       Validation Physical Loss: 49.4204
+Epoch 2100, Training Loss: 0.2097, Validation Loss: 0.1630,                       Validation Physical Loss: 44.0477
+Epoch 2200, Training Loss: 0.2105, Validation Loss: 0.1744,                       Validation Physical Loss: 53.0404
+Epoch 2300, Training Loss: 0.2223, Validation Loss: 0.1617,                       Validation Physical Loss: 48.5979
+Epoch 2400, Training Loss: 0.2188, Validation Loss: 0.1656,                       Validation Physical Loss: 30.8910
+Epoch 2500, Training Loss: 0.2057, Validation Loss: 0.1614,                       Validation Physical Loss: 47.2095
+Epoch 2600, Training Loss: 0.2129, Validation Loss: 0.1505,                       Validation Physical Loss: 50.1770
+Epoch 2700, Training Loss: 0.2208, Validation Loss: 0.1491,                       Validation Physical Loss: 36.0482
+Epoch 2800, Training Loss: 0.2105, Validation Loss: 0.1419,                       Validation Physical Loss: 42.2492
+Epoch 2900, Training Loss: 0.1957, Validation Loss: 0.1448,                       Validation Physical Loss: 49.8190
+Epoch 3000, Training Loss: 0.1917, Validation Loss: 0.1481,                       Validation Physical Loss: 47.8090
+Epoch 3100, Training Loss: 0.2186, Validation Loss: 0.1417,                       Validation Physical Loss: 39.8641
+Epoch 3200, Training Loss: 0.2036, Validation Loss: 0.1349,                       Validation Physical Loss: 42.6798
+Epoch 3300, Training Loss: 0.1947, Validation Loss: 0.1401,                       Validation Physical Loss: 47.6611
+Epoch 3400, Training Loss: 0.1927, Validation Loss: 0.1428,                       Validation Physical Loss: 51.3225
+Epoch 3500, Training Loss: 0.2000, Validation Loss: 0.1313,                       Validation Physical Loss: 43.5185
+Epoch 3600, Training Loss: 0.1976, Validation Loss: 0.1315,                       Validation Physical Loss: 43.0741
+Epoch 3700, Training Loss: 0.1977, Validation Loss: 0.1347,                       Validation Physical Loss: 45.7814
+Epoch 3800, Training Loss: 0.1991, Validation Loss: 0.1314,                       Validation Physical Loss: 37.6485
+Epoch 3900, Training Loss: 0.1945, Validation Loss: 0.1296,                       Validation Physical Loss: 42.4484
+Fold 4 completed. Best validation loss: 0.1294
+
+Training completed. Average validation loss across folds: 7.8905
+Model weights saved to optuna_results/model_weights_20241116_045918.pth
