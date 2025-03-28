@@ -7,9 +7,9 @@ Yiren Shen (yrshen@stanford.edu), Jacob T. Needels, Juan J. Alonso
 # 🔍 Highlights
 
 - 🧠 **GNN-Based Surrogate**: Learns panel-wise pressure field corrections from CFD to enhance VLM predictions.
-- 📊 **threefold Accuracy Improvement**: Achieves up to 3x reduction in normalized root mean square error (NRMSE) for aerodynamic coefficients.
-- 📐 **Geometry Generalization**: Demonstrates robust prediction performance across unseen delta wing geometries.
-- 🧪 **Physics-Informed Training**: Includes physical loss terms and latent space ablation for model interpretability and robustness.
+- 📊 **threefold Accuracy Improvement**: Achieves up to 5x reduction in normalized root mean square error (NRMSE) for aerodynamic coefficients.
+- 📐 **Geometry Generalization**: Demonstrates robust prediction performance across unseen delta wing geometries within a design space.
+- 🧪 **Physics-Informed Training**: Includes physical loss terms from VLM for faster convergence and robustness.
 - Predicts panel-wise pressure distribution (`∆Cp`) with high fidelity.
 - Generalizes well to unseen configurations with moderate geometric variations.
 - Compatible with existing conceptual design and MDO frameworks ([SUAVE](https://github.com/suavecode/SUAVE)).
@@ -53,10 +53,11 @@ Each row contains: test index, AOA, Mach number, Reynolds number.
 
 ## 3. ./scripts
 - `search_hp_for_deltawing.py`: Script for hyperparameter optimization using Optuna. 
-- `VLM.py`: Modified SUAVE VLM, allowing DCP overwrite and linear system data output. Replace the SUAVE `VLM.py` with this file. 
+- `VLM.py`: Modified SUAVE VLM, allowing DCP overwrite and linear system data output. Replace the SUAVE's `VLM.py` with this file. 
 - `example_dataset_run.py`: generate the pickle dataset file for a specific wing geometry, rely on `Dataloader.py` for parsing and `generateDeltawing.py` for vehicle and analysis setup. The script reads in a list of CFD `surface_flow.vtu` files of CFD runs, and then parse the data by projecting CFD surface pressure to DCP (as defined in VLM, Cp_lower-Cp_upper) as used in VLM using a panel-wise averaged, chrod line normal projection. 
 - `generateDeltawing.py`: example file of how a Delta wing vehicle is defined in SUAVE. The VLM analysis settings are also defined in this file. 
 - `DataLoader.py`: data loader helper functions for CFD data import. 
+- `assess_model_performance.ipynb`: template for performing post-training model assessment, includent latent space study. Given a MFData class .pkl data, how good is the model performance?
 
 ## 4. ./pretrained_model
 - Identified best model hyper-parameters and weights from Optuna. The model weights is used for all prediction tasks. For hyper-parameters optimization methods and results, see Shen et al., 2025, "VortexNet: A Graph Neural Network-Based Multi-Fidelity Surrogate Model for Field Predictions," https://arc.aiaa.org/doi/10.2514/6.2025-0494
