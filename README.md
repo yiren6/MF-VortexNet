@@ -1,4 +1,4 @@
-# MF-VortexNet
+# VortexNet
 **Graph Neural Network-Based Multi-Fidelity Correction to Vortex Lattice Method. Please see the paper INSERT DOI.**
 
 
@@ -52,7 +52,16 @@ Free-stream conditions for both CFD and VLM runs.
 Each row contains: test index, AOA, Mach number, Reynolds number.
 
 ## 3. ./scripts
-- `search_hp_for_deltawing.py`: Script for hyperparameter optimization using Optuna.
+- `search_hp_for_deltawing.py`: Script for hyperparameter optimization using Optuna. 
+- `VLM.py`: Modified SUAVE VLM, allowing DCP overwrite and linear system data output. Replace the SUAVE `VLM.py` with this file. 
+- `example_dataset_run.py`: generate the pickle dataset file for a specific wing geometry, rely on `Dataloader.py` for parsing and `generateDeltawing.py` for vehicle and analysis setup. The script reads in a list of CFD `surface_flow.vtu` files of CFD runs, and then parse the data by projecting CFD surface pressure to DCP (as defined in VLM, Cp_lower-Cp_upper) as used in VLM using a panel-wise averaged, chrod line normal projection. 
+- `generateDeltawing.py`: example file of how a Delta wing vehicle is defined in SUAVE. The VLM analysis settings are also defined in this file. 
+- `DataLoader.py`: data loader helper functions for CFD data import. 
+
+## 4. ./pretrained_model
+- Identified best model hyper-parameters and weights from Optuna. The model weights is used for all prediction tasks. For hyper-parameters optimization methods and results, see Shen et al., 2025, "VortexNet: A Graph Neural Network-Based Multi-Fidelity Surrogate Model for Field Predictions," https://arc.aiaa.org/doi/10.2514/6.2025-0494
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 # Abstract
