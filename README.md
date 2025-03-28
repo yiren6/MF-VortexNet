@@ -10,9 +10,7 @@ Yiren Shen (yrshen@stanford.edu), Jacob T. Needels, Juan J. Alonso
 - 📊 **threefold Accuracy Improvement**: Achieves up to 5x reduction in normalized root mean square error (NRMSE) for aerodynamic coefficients.
 - 📐 **Geometry Generalization**: Demonstrates robust prediction performance across unseen delta wing geometries within a design space.
 - 🧪 **Physics-Informed Training**: Includes physical loss terms from VLM for faster convergence and robustness.
-- Predicts panel-wise pressure distribution (`∆Cp`) with high fidelity.
-- Generalizes well to unseen configurations with moderate geometric variations.
-- Compatible with existing conceptual design and MDO frameworks ([SUAVE](https://github.com/suavecode/SUAVE)).
+- 🔗 **MF Conceptual Design Framework**: Compatible with existing conceptual design and MDO frameworks ([SUAVE](https://github.com/suavecode/SUAVE)).
 
 # Environment
   ## 1. Library:
