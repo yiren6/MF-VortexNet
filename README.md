@@ -140,5 +140,9 @@ into a conceptual aircraft design environment [SUAVE](https://github.com/suaveco
 
 
 
-# Citing MF-VortexNet
-UPDATE PAPER DOI
+# Citing VortexNet
+You're welcome to build upon this project. For citation, please cite:
+- UPDATE PAPER DOI
+- Yiren Shen, Jacob T. Needels and Juan J. Alonso. "VortexNet: A Graph Neural Network-Based Multi-Fidelity Surrogate Model for Field Predictions," AIAA 2025-0494. AIAA SCITECH 2025 Forum. January 2025. https://doi.org/10.2514/6.2025-0494
+- Yiren Shen and Juan J. Alonso. "Performance Evaluation of a Graph Neural Network-Augmented Multi-Fidelity Workflow for Predicting Aerodynamic Coefficients on Delta Wings at Low Speed," AIAA 2025-2360. AIAA SCITECH 2025 Forum. January 2025. https://doi.org/10.2514/6.2025-2360
+
