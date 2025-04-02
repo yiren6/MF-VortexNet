@@ -16,7 +16,7 @@ Yiren Shen (yrshen@stanford.edu), Jacob T. Needels, Juan J. Alonso
   ## 1. Library:
     pip install -r requirements.txt
   ## 2. SUAVE: 
-    [SUAVE Install](https://suave.stanford.edu/download/standard_install.html)
+    https://suave.stanford.edu/download/standard_install.html
 
 # Content
 
