@@ -7,7 +7,7 @@ Yiren Shen (yrshen@stanford.edu), Jacob T. Needels, Juan J. Alonso
 # 🔍 Highlights
 
 - 🧠 **GNN-Based Surrogate**: Learns panel-wise pressure field corrections from CFD to enhance VLM predictions.
-- 📊 **threefold Accuracy Improvement**: Achieves up to 5x reduction in normalized root mean square error (NRMSE) for aerodynamic coefficients.
+- 📊 **threefold Accuracy Improvement**: Achieves up to 3x reduction in normalized root mean square error (NRMSE) for aerodynamic coefficients.
 - 📐 **Geometry Generalization**: Demonstrates robust prediction performance across unseen delta wing geometries within a design space.
 - 🧪 **Physics-Informed Training**: Includes physical loss terms from VLM for faster convergence and robustness.
 - 🔗 **MF Conceptual Design Framework**: Compatible with existing conceptual design and MDO frameworks ([SUAVE](https://github.com/suavecode/SUAVE)).
