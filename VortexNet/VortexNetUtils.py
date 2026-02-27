@@ -1,37 +1,18 @@
 """
-VortexNet/VortexNetUtils.py
+VortexNet/Utils.py
 Utility functions for VortexNet project such as loading data, plotting, etc.
 
 Yiren Shen 
 Nov, 12, 2021
 """
 import numpy as np
-from scipy.spatial import distance_matrix
-from scipy.interpolate import griddata
-
-import torch
-from torch_geometric.data import Data
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler
-import pickle
-import pandas as pd
-
-import math
-import os
-import re
-import sys
-from VortexNet.MFData import MFData
-
-
-
 
 # Creating a utility class based on the identified reusable functions
 class VortexNetUtils:
     """
     A utility class for common functions used in aerodynamic analysis and data processing for delta wing cases.
     """
-
-
+    
     @staticmethod
     def load_pickle_data(directory_path):
         """
@@ -41,19 +22,7 @@ class VortexNetUtils:
         import pickle
         import pandas as pd
         import re
-        from VortexNet.MFData import MFData
-        print(f"MFData class: {MFData}")
-
-        import pickle
-
-        class customUnpickler(pickle.Unpickler):
-            def find_class(self, module, name):
-                # Map the old module path to the new one
-                if module == "MFData":  # Replace with the old module path
-                    module = "VortexNet.MFData"  # Replace with the new module path
-                return super().find_class(module, name)
-
-
+        
         mf_results = []
         for filename in os.listdir(directory_path):
             if filename.endswith(".pkl"):
@@ -80,9 +49,9 @@ class VortexNetUtils:
                     naca_number = None
                     naca_dict = None
                 with open(file_path, 'rb') as f:
-                    
-                    data = customUnpickler(f).load()
+                    data = pickle.load(f)
                     for d in data:
+                        
                         d.geom = [sweep_number, naca_dict]
                     mf_results.extend(data)  # Assuming data is a list
         
@@ -227,8 +196,16 @@ class VortexNetUtils:
     
     @staticmethod
     def prepare_dataset_with_standarization(
-    control_points, vlm_cp, cfd_cp, vlm_thickness, vlm_curvature_u, vlm_curvature_l, vlm_slope_u, vlm_slope_l, ff,
-    aic_matrix, rhs_matrix, dcpsid, factor, chord, rnmax, Ref_Length):
+        control_points, vlm_cp, cfd_cp, vlm_thickness, vlm_curvature_u, vlm_curvature_l, vlm_slope_u, vlm_slope_l, ff,
+        aic_matrix, rhs_matrix, dcpsid, factor, chord, rnmax):
+        from scipy.spatial import distance_matrix
+        import torch
+        from sklearn.preprocessing import StandardScaler
+        import math
+        from torch_geometric.data import Data
+
+
+
         """
 
         Parameters:
@@ -260,8 +237,6 @@ class VortexNetUtils:
         edges = []
 
         # Iterate over each point to find its 4 nearest neighbors
-        # usually, it corresponds to the left, right, front, and back for any central nodes.
-        # for edge vertex, this definition may leads to different connectivity topology. 
         for i in range(NUM_POINTS):
             # Get indices of the 4 nearest neighbors (excluding the point itself)
             nearest_neighbors = np.argsort(dist_matrix[i])[1:5]
@@ -318,17 +293,13 @@ class VortexNetUtils:
         # Compute freestream properties
         gamma = 1.4  # Specific heat ratio for air
         R = 287.05   # Specific gas constant for air in J/(kg·K)
-        T_inf = 322  # Freestream temperature in K (adjust if necessary)
+        T_inf = 288.15  # Freestream temperature in K (adjust if necessary)
         P_inf = 101325  # Freestream pressure in Pa (standard atmospheric pressure)
-        # Sutherland's constants for air
-        mu_ref = 1.71e-5
-        T_ref = 273.11
-        S = 110.56      # Sutherland's temperature, K
-        viscosity = mu_ref * (T_inf / T_ref) ** 1.5 * (T_ref + S) / (T_inf + S)
+
         mach_inf = ff[:, 1].mean()  # Assuming Mach number is constant per sample
-        rho_inf = VortexNetUtils.compute_freestream_density(re[0], mach_inf, viscosity, Ref_Length, T_inf)
         a_inf = np.sqrt(gamma * R * T_inf)
         V_inf = mach_inf * a_inf
+        rho_inf = P_inf / (R * T_inf)
 
         # Pack data into a torch geometric data object
         data = Data(
@@ -351,6 +322,32 @@ class VortexNetUtils:
         data.chord = torch.tensor(chord, dtype=torch.float)
         data.rnmax = torch.tensor(rnmax, dtype=torch.float)
         return data
+
+
+    @staticmethod
+    def integrate_fois(AOA, Ma, DCP, SPC):
+        """
+        Computes CL, CD, and CM based on Angle of Attack (AOA), Mach number (Ma), and other parameters.
+        """
+        add_path = '/home/yiren/Desktop/SCALOS/GNN_Test'
+        sys.path.append(add_path)
+        from analyze_delta_wing_TM4645 import plot_field_distribution
+        from DeltaWingTM4645 import vehicle_setup, configs_setup
+        from DeltaWingTM4645 import full_setup, point_analysis
+        
+        configs, analyses = full_setup()
+        configs.finalize()
+        analyses.finalize()
+        
+        results = point_analysis(configs.deltawing, AOA, Ma, 
+                                 if_plot=False, 
+                                 DCP_overwrite=DCP, 
+                                 SPC_enforce=SPC)
+        
+        CL = results.CL[0][0]
+        CD = results.CDi[0][0]
+        CM = results.CM[0][0]
+        return CL, CD, CM
 
     @staticmethod
     def plot_with_surface(ax, mach_np, aoa_np, vlm_data_np, cfd_data_np, maped_cfd_data_np, 
@@ -492,7 +489,9 @@ class VortexNetUtils:
         Plots the percentage error of NN predictions relative to mapped CFD data on the AoA-Mach,
         AoA-Re, and Mach-Re planes.
         """
-
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from scipy.interpolate import griddata
         
         # Compute the percentage error
         percentage_error = 100 * (nn_cm_np - maped_cfd_cm_np) / maped_cfd_cm_np
@@ -502,7 +501,7 @@ class VortexNetUtils:
         num_aoa_points, num_mach_points, num_re_points = 500, 500, 500
         aoa_grid = np.linspace(aoa_np.min(), aoa_np.max(), num_aoa_points)
         mach_grid = np.linspace(mach_np.min(), mach_np.max(), num_mach_points)
-        re_grid_scaled = np.linspace((re_np / 1e7).min(), (re_np / 1e7).max(), num_re_points) #normalize Re by 10^7
+        re_grid_scaled = np.linspace((re_np / 1e7).min(), (re_np / 1e7).max(), num_re_points)
 
         # Plot AoA-Mach plane
         AOA_grid, Mach_grid = np.meshgrid(aoa_grid, mach_grid)
@@ -550,60 +549,4 @@ class VortexNetUtils:
         plt.ylabel('Reynolds Number')
         plt.title('Percentage Error of NN Prediction Relative to Mapped CFD Data on Mach-Re Plane')
         plt.tight_layout()
-        plt.show()
-    
-    @staticmethod
-    def compute_freestream_density(reynolds_number, mach, viscosity, characteristic_length, TInfinity):
-        """
-        Compute the freestream density using the Reynolds number definition.
-        
-        """
-        gamma = 1.4
-        R = 287.05
-        speed_of_sound = math.sqrt(gamma * R * TInfinity)
-        velocity = mach * speed_of_sound
-        density = (reynolds_number * viscosity) / (velocity * characteristic_length)
-        return density
-    
-    @staticmethod
-    def plot_field_distribution(VD, cp, title='Pressure Distribution', min=None, max=None):
-        # Ensure cp is a 1D array
-        if cp.ndim > 1:
-            cp = cp.squeeze(0)
-
-        if min is None:
-            vmin = np.min(cp)
-        else:
-            vmin = min    
-
-        if max is None:
-            vmax = np.max(cp)     
-        else:
-            vmax = max	
-        
-        fig, ax = plt.subplots()
-        
-        # Normalize the pressure coefficient values to the range [0, 1]
-        norm = plt.Normalize(vmin=vmin, vmax=vmax)
-        cmap = plt.get_cmap('viridis')
-        scalar_map = plt.cm.ScalarMappable(norm=norm, cmap=cmap)
-        
-        # Plot the panels and fill with cp data
-        for i in range(len(VD.XA1)):
-            x = [VD.XA1[i], VD.XB1[i], VD.XB2[i], VD.XA2[i], VD.XA1[i]]
-            y = [VD.YA1[i], VD.YB1[i], VD.YB2[i], VD.YA2[i], VD.YA1[i]]
-            
-            # Get the color for the current pressure coefficient value
-            cp_value = cp[i]
-            color = scalar_map.to_rgba(cp_value)
-            
-            # Fill the panel with the corresponding cp value
-            polygon = plt.Polygon(np.column_stack((x, y)), closed=True, facecolor=color, edgecolor=(0, 0, 0, 0.1))
-            ax.add_patch(polygon)
-        
-        plt.colorbar(scalar_map, label=title)
-        plt.title(title)
-        plt.xlabel('X [m]')
-        plt.ylabel('Y [m]')
-        plt.axis('equal')
         plt.show()

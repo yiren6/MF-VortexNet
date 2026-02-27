@@ -200,7 +200,7 @@ def main():
         # compute viscosity used for CFD 
         viscosity = mu_ref * (TInfinity / T_ref) ** 1.5 * (T_ref + S) / (TInfinity + S)
         rhoInfinity = compute_freestream_density(Re, Ma, viscosity, CHAR_LENGTH, TInfinity)
-        reference_pressure = 0.5 * rhoInfinity * (Ma ** 2) * gamma * R * TInfinity
+        reference_pressure = TInfinity * R * rhoInfinity
         print(f"Reference Pressure: {reference_pressure:.2f} Pa")
         current_result.ref_pressure = reference_pressure
 

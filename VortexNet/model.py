@@ -1,17 +1,3 @@
-"""
-Model for Votex Net Graph Attention Network Model. 
-
-Ref: P. Velickovic, https://arxiv.org/abs/1710.10903
-Y. Shen, June 2024
-
-Modification:
-Y. Shen, August 10 2024: GNN1: model with GAT attention 
-Y. Shen, September 20 2024: GNN2: model with edge encoding only
-Y. Shen, September 30 2024: GNN3: model with attention and edge encoding
-Y. Shen, October 10 2024: GNN4: updated model
-
-"""
-
 import torch
 from torch_geometric.nn import GCNConv, GATConv, global_mean_pool, LayerNorm, \
     BatchNorm, SAGEConv, GINEConv, GATv2Conv, JumpingKnowledge
@@ -19,7 +5,16 @@ import torch.nn.functional as F
 from torch_geometric.data import Data
 import torch.nn as nn
 
+"""
+Model for Votex Net Graph Attention Network Model. 
 
+Ref: P. Velickovic, https://arxiv.org/abs/1710.10903
+Y. Shen, June 2024
+
+Modification:
+Y. Shen, Feb 2026, Consolided GNN
+
+"""
 
 
 class GNN4(torch.nn.Module):
@@ -39,7 +34,7 @@ class GNN4(torch.nn.Module):
         self.norm_layers = nn.ModuleList()
         self.layer_output_dims = []
 
-        # Create GNN layers with skip connections structure
+        # Create GNN layers
         for i in range(HOP):
             if i == 0:
                 # First layer input dimension
@@ -76,7 +71,6 @@ class GNN4(torch.nn.Module):
         self.skip_connections = {}
         self.skip_linear_layers = nn.ModuleDict()
 
-        # Create skip connections
         for i in range(HOP // 2):
             encoder_layer = i
             decoder_layer = HOP - i - 1
@@ -89,11 +83,12 @@ class GNN4(torch.nn.Module):
             if encoder_dim != decoder_dim:
                 # Create a linear layer to map from encoder_dim to decoder_dim
                 self.skip_linear_layers[str(encoder_layer)] = nn.Linear(encoder_dim, decoder_dim)
+                print(f"Creating linear layer from  skip connection from layer {encoder_layer} with dimensions {encoder_dim} to {decoder_dim}")
             else:
                 # No need for linear layer if dimensions match
                 self.skip_linear_layers[str(encoder_layer)] = None
 
-        # Optional Fully Connected Layer when dimensions are different
+        # Optional Fully Connected Layer
         self.num_coarse = num_coarse
         self.num_fine = num_fine
         if num_coarse != num_fine:
@@ -160,7 +155,6 @@ class GNN4(torch.nn.Module):
             x = self.fc(x)
             x = x.view(-1, 1)
 
-        # Return latent space outputs if needed
         if return_latent_space:
             return x, latent_space_outputs
         else:

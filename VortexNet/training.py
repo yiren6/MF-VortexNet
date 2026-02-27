@@ -1,8 +1,3 @@
-"""
-Functions for training the VortexNet model.
-Yiren Shen, Sep 2024
-
-"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -13,9 +8,9 @@ from torch_geometric.data import DataLoader
 import copy
 from torch_geometric.data import Batch
 import numpy as np
+import csv
 
 def custom_collate(data_list):
-    # collate function for DataLoader for physical AIC-RHS loss
     batch = Batch.from_data_list(data_list)
     batch.aic_matrices = [data.aic_matrix for data in data_list]
     batch.rhs_matrices = [data.rhs_matrix for data in data_list]
@@ -26,34 +21,28 @@ def custom_collate(data_list):
     return batch
 
 
+def to_float(v):
+    # Check if the variable is a PyTorch tensor
+    if torch.is_tensor(v):
+        return v.detach().cpu().item()
+    return v  # If it's already a float/int, just return it
+
+
 class PenalizedSmoothL1Loss(nn.Module):
-    """
-    Penalized Smooth L1 Loss function with additional penalties for zero values and sign flips.
-    """
     def __init__(self, penalty_weight=1.0):
         super(PenalizedSmoothL1Loss, self).__init__()
         self.huber_loss = nn.SmoothL1Loss()
         self.penalty_weight = penalty_weight
-        self.alpha = 10.0
 
     def forward(self, predictions, targets):
         huber_loss = self.huber_loss(predictions, targets)
         diff = predictions - targets
-        squared_error = diff ** 2
-        # Emphasize small values
-        small_value_emphasis = torch.where(targets < 1e-1, self.alpha * squared_error, squared_error)
-        zero_penalty = torch.mean((predictions == 0).float()) * self.penalty_weight
-        zero_penalty = 0.0
-        sign_flip_penalty = torch.mean((torch.sign(predictions) != torch.sign(targets)).float()) * self.penalty_weight
-
-
-        return huber_loss + zero_penalty + sign_flip_penalty + small_value_emphasis.mean()
+        
+        return huber_loss 
 
 def train_model(model, data, learning_rate=0.01, epochs=1000, clip_value=5000.0, \
                 noise_level=0.01, penalty_weight=1.0, descent_batch=10, device='cpu'):
-    """
-    Train model.
-    """
+    
     model.to(device)
     data.to(device)
 
@@ -92,6 +81,7 @@ def train_model(model, data, learning_rate=0.01, epochs=1000, clip_value=5000.0,
         loss, out = train()
         if epoch % 300 == 0:
             print(f'Epoch {epoch}, Loss: {loss:.4f}')
+            
             print('Predictions:', out[:10].detach().cpu().numpy().flatten())
             print('True values:', data.y[:10].detach().cpu().numpy().flatten())
         
@@ -223,6 +213,7 @@ def train_model_k_fold(model, data, k=4, learning_rate=0.01, epochs=100, batch_s
         def train():
             model.train()
             total_loss = 0
+            itercount = 0
             for batch in train_loader:
                 batch = batch.to(device)
                 optimizer.zero_grad()
@@ -233,7 +224,6 @@ def train_model_k_fold(model, data, k=4, learning_rate=0.01, epochs=100, batch_s
                 out = model(batch)
                 # compute the data loss
                 loss = criterion(out, batch.y)
-
                 # Compute the physical residual and physical loss
                 physical_loss = compute_physical_residual(out, batch)
 
@@ -243,6 +233,7 @@ def train_model_k_fold(model, data, k=4, learning_rate=0.01, epochs=100, batch_s
                 torch.nn.utils.clip_grad_norm_(model.parameters(), clip_value)
                 optimizer.step()
                 total_loss += total_batch_loss.item()
+                itercount += 1
             # Adjust the scheduler after each epoch
             scheduler.step(total_loss / len(train_loader))
             return total_loss / len(train_loader)
