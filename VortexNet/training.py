@@ -36,7 +36,6 @@ class PenalizedSmoothL1Loss(nn.Module):
 
     def forward(self, predictions, targets):
         huber_loss = self.huber_loss(predictions, targets)
-        diff = predictions - targets
         
         return huber_loss 
 
@@ -206,7 +205,7 @@ def train_model_k_fold(model, data, k=4, learning_rate=0.01, epochs=100, batch_s
         criterion = PenalizedSmoothL1Loss(penalty_weight=penalty_weight)
 
         # Adjust the scheduler's patience if needed
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', patience=300, factor=0.5)
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', patience=100, factor=0.5)
 
         LAMBDA = (Lambda + (1 - Lambda) * np.exp(- np.log(1/Lambda) * (fold-1) / (k-1))) * max_phy_loss
 
@@ -239,7 +238,7 @@ def train_model_k_fold(model, data, k=4, learning_rate=0.01, epochs=100, batch_s
             return total_loss / len(train_loader)
 
         best_loss = float('inf')
-        patience = 500
+        patience = 100
         counter = 0
         best_model_state = None
 

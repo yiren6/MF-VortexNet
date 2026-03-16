@@ -1,3 +1,10 @@
+"""
+Data structure class to store VLM and CFD data for a given test case.
+
+Y. Shen, Nov 2024
+"""
+
+
 import numpy as np
 import pickle
 

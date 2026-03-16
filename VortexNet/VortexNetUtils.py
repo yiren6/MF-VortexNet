@@ -325,31 +325,6 @@ class VortexNetUtils:
 
 
     @staticmethod
-    def integrate_fois(AOA, Ma, DCP, SPC):
-        """
-        Computes CL, CD, and CM based on Angle of Attack (AOA), Mach number (Ma), and other parameters.
-        """
-        add_path = '/home/yiren/Desktop/SCALOS/GNN_Test'
-        sys.path.append(add_path)
-        from analyze_delta_wing_TM4645 import plot_field_distribution
-        from DeltaWingTM4645 import vehicle_setup, configs_setup
-        from DeltaWingTM4645 import full_setup, point_analysis
-        
-        configs, analyses = full_setup()
-        configs.finalize()
-        analyses.finalize()
-        
-        results = point_analysis(configs.deltawing, AOA, Ma, 
-                                 if_plot=False, 
-                                 DCP_overwrite=DCP, 
-                                 SPC_enforce=SPC)
-        
-        CL = results.CL[0][0]
-        CD = results.CDi[0][0]
-        CM = results.CM[0][0]
-        return CL, CD, CM
-
-    @staticmethod
     def plot_with_surface(ax, mach_np, aoa_np, vlm_data_np, cfd_data_np, maped_cfd_data_np, 
                           label_vlm, label_cfd, label_maped_cfd, zlabel):
         """

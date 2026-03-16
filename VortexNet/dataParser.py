@@ -1,3 +1,12 @@
+"""
+dataParser class for loading, preprocessing, normalizing, and preparing datasets from CFD and VLM results to GNN training and inference. 
+Contain the dataPaser class and an unit test to validate the data processing pipeline.
+
+Y. Shen, Jan 2026
+
+"""
+
+
 #%%
 import subprocess
 import sys
@@ -12,7 +21,6 @@ if module_path not in sys.path:
     sys.path.append(module_path)    
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from VortexNet import GNN4, train_model_k_fold, MFData
-import scipy
 from scipy.spatial import distance_matrix
 from scipy import stats
 import matplotlib.pyplot as plt
@@ -21,9 +29,6 @@ import pickle
 import math
 import pandas as pd
 from datetime import datetime
-import itertools
-import json
-import random
 from sklearn.model_selection import train_test_split
 from plotly.offline import plot
 from torch_geometric.data import Data
@@ -860,15 +865,11 @@ if __name__ == "__main__":
     print(f"  Number of features: {all_residuals_array.shape[1]}")
     
     # Check if residuals are acceptably small (within numerical precision)
-    # For float32, we expect residuals around 1e-6 to 1e-5 due to tanh/arctanh numerical precision
     tolerance = 1e-4
     if overall_max_residual < tolerance:
-        print(f"\n✓ TEST PASSED: All residuals < {tolerance:.2e}")
+        print(f"TEST PASSED: All residuals < {tolerance:.2e}")
     else:
-        print(f"\n✗ TEST FAILED: Some residuals >= {tolerance:.2e}")
-        print(f"  This might be due to:")
-        print(f"  - Numerical precision limits in tanh/arctanh")
-        print(f"  - Extreme values near tanh boundaries")
+        print(f"TEST FAILED: Some residuals >= {tolerance:.2e}")
     
     print("="*80 + "\n")
 
