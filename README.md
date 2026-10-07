@@ -13,6 +13,7 @@ Yiren Shen (yrshen@stanford.edu), Jacob T. Needels, Juan J. Alonso
 - 🔗 **MF Conceptual Design Framework**: Compatible with existing conceptual design and MDO frameworks ([SUAVE](https://github.com/suavecode/SUAVE)).
 
 # Environment
+  Both the ``Library'' and ``SUAVE'' are required. 
   ## 1. Library:
     pip install -r requirements.txt
   ## 2. SUAVE: 
@@ -48,6 +49,9 @@ Free-stream conditions are included in the `./freestream_configurations` files.
 ### ./dataset/freestream_configurations
 Free-stream conditions for both CFD and VLM runs.  
 Each row contains: test index, AOA, Mach number, Reynolds number.
+
+### ./dataset/portable 
+Portable pickles files (does not require the VortexNet environment) of data within train_set and new_geom along with readable JSON summary. 
 
 ## 3. ./scripts
 - `search_hp_for_deltawing.py`: Script for hyperparameter optimization using Optuna. 

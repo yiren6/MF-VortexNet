@@ -18,3 +18,4 @@ plotly
 tensorboard
 optuna
 vtk
+seaborn
